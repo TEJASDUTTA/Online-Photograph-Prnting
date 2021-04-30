@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+    <h3>
+        <h1 class="m-1 p-1"> Order Receipt </h1>
+        <div class="jumbotron text-left ">
+            <div class="diplay-4">Total Cost : <%= cost %>
+            </div>
+            <p>
+                Name of Customer : <%= data.Name %>
+            </p>
+            <p>
+                Email ID : <%= data.Email_ID %>
+            </p>
+            <p>
+                Date of Order : <%= date %>
+            </p>
+            <p>
+                Pincode of Delivery : <%= data.PinCode %>
+            </p>
+            <p>
+                Card Used for Transaction : <%= data.cardNo %>
+            </p>
+            <p>
+                Other Details : <%= data.Other %>
+            </p>
+
+        </div>
+    </h3>
+    <form action="/done" method="get">
+        <button class="btn btn-warning btn-lg">
+            Exit
+        </button>
+    </form>
+
+    <%- include('partials/footer') %>
