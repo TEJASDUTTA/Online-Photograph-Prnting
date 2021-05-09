@@ -105,6 +105,8 @@ app.post('/verify',function (req, res){
                     Email ID : ${result[0].Email_ID}
 
                     Pincode Of Delivery : ${result[0].PinCode}
+
+                    Address of Delivery : ${req.body.addr}
                     
                     Card Used : ${result[0].cardNo}
 
@@ -125,7 +127,8 @@ app.post('/verify',function (req, res){
                 res.render("address",{
                     data : result[0],
                     date:req.body.date,
-                    cost:req.body.cost
+                    cost:req.body.cost,
+                    addr:req.body.addr
                 });
             }
             
