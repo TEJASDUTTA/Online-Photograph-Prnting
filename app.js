@@ -33,7 +33,7 @@ const connection = mysql.createConnection({
 
 connection.connect(function (error){
     if(error){
-        console.log("error occured!!");
+        console.log(error);
         res.render("error");
     }else{
         console.log("Connected To MySQL");
@@ -44,7 +44,8 @@ app.get("/ind", function (req, res){
     
     connection.query("select * from prices order by length ASC;",function (error,row,feild){
         if(!!error){
-            res.render("error")
+            res.render("error");
+            return ;
         }else{
             let arr = [] ;
             for(i in row){
@@ -71,8 +72,9 @@ app.post('/verify',function (req, res){
         req.body.year]
     connection.query("select * from cust where cardNo = ? and cvv = ? and year_of_expiry = ?",detail,function (error,result,feild){
         if(error){
-            console.log("error occured!!");
+            console.log(error);
             res.render("error");
+            return ;
         }else{
            if(result.length == 0)
             res.render('wrong')
@@ -84,8 +86,10 @@ app.post('/verify',function (req, res){
                     req.body.cost
                 ]
                 connection.query("insert into tran value(?)",[tran],function(err,ans,feild){
-                    if(err)
+                    if(err){
                         res.render("error")
+                        return ;
+                    } 
                     else
                         console.log("Transaction Recorded");
                 })
@@ -120,6 +124,7 @@ app.post('/verify',function (req, res){
                     if(error){
                         console.log("Mail Failed");
                         res.render("error")
+                        return ;
                     }else{
                         alert("Email Sent");
                     }
@@ -156,7 +161,7 @@ app.post('/addCard', function (req, res){
     connection.query("insert into cust value(?,?,?,?,?,?,?);",detail,function (error,row,feild){
         if(error)
         {
-            console.log("error occured!!");    
+            console.log(error);    
         res.render("error");
     }
         else{
@@ -176,7 +181,7 @@ app.post('/addPrice', function (req, res){
     connection.query("insert into prices value(?,?,?,?);",detail,function (error,row,feild){
         if(error)
         {
-            console.log("error occured!!");    
+            console.log(error);    
         res.render("error");
     }
         else{
