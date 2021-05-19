@@ -44,6 +44,7 @@ app.get("/ind", function (req, res){
     
     connection.query("select * from prices order by length ASC;",function (error,row,feild){
         if(!!error){
+            console.log(error);
             res.render("error");
             return ;
         }else{
